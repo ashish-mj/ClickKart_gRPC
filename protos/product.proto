@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package product;
+
+message product{
+    string productId = 1;
+    string productName = 2;
+    float price = 3;
+    float tax = 4;
+    string description = 5;
+    string status = 6;
+}
+
+message productId{
+    string productId = 1;
+}
+
+service productService{
+      rpc createProduct (product) returns (productId);
+      rpc getProduct(productId) returns (product);
+      rpc updateProduct(product) returns (google.protobuf.Empty);
+      rpc deleteProduct(productId) returns (google.protobuf.Empty);
+      rpc getAllProducts(google.protobuf.Empty) returns (stream product);
+}
